@@ -1,0 +1,48 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+// } Driver Code Ends
+//User function template for C++
+class Solution{
+public:
+	string removeDuplicates(string str) {
+	    // code here
+	     map<char, char> dupstr;
+        string str2 = "";
+        // vector<char> dupstr(52, '0');
+        int n = str.length();
+        for (int i = 0; i < n; i++)
+        {
+            if (!(dupstr.find(str[i]) != dupstr.end()))
+            {
+                str2 += str[i];
+                dupstr[str[i]] = str[i];
+            }
+        }
+        str = str2;
+        
+        
+        return str;
+	}
+};
+
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string str;
+        cin >> str;
+        Solution ob;
+        auto ans = ob.removeDuplicates(str);
+
+        cout << ans << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
