@@ -1,0 +1,43 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+  public:
+    vector<int> Series(int n) {
+        // Code here
+        int num1=0,num2=1,num3;
+        vector<int> arr;
+        int mod=1e9+7;
+        arr.push_back(num1);
+        arr.push_back(num2);
+        int i=1;
+        while(i<n){
+            num3=(num1+num2)%mod;
+            arr.push_back(num3);
+            num1=num2;
+            num2=num3;
+            i++;
+        }
+        return arr;
+    }
+};
+
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        Solution obj;
+
+        vector<int> ans = obj.Series(n);
+        for (auto x : ans) cout << x << " ";
+        cout << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
