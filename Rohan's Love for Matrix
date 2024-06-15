@@ -1,0 +1,42 @@
+//{ Driver Code Starts
+// Initial Template for C++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function Template for C++
+class Solution {
+  public:
+    int firstElement(int n) {
+        // code here
+        int mod=1e9+7;
+        int i=1;
+        int a_10=1,b_10=0;
+        
+        while(i<n){
+            int temp=a_10;
+            a_10=(a_10+b_10)%mod;
+            b_10=temp;
+            
+            i++;
+        }
+        return a_10;
+    }
+};
+
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        Solution ob;
+        cout << ob.firstElement(n) << endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
