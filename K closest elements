@@ -1,0 +1,131 @@
+//{ Driver Code Starts
+// Initial template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function template for C++
+
+class Solution {
+  public:
+    vector<int> printKClosest(vector<int> arr, int n, int k, int x) {
+        // code here
+        vector<int> ans;
+        vector<int> kleft,kright;
+        int low=0,high=n-1;
+        int indlow,indhigh,ind=-1;
+        int clolow=INT_MAX,clohigh=INT_MAX;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(arr[mid]==x){
+                ind=mid;
+                break;
+            }
+            else if(arr[mid]>x){
+                clohigh=arr[mid]-x;
+                indhigh=mid;
+                high=mid-1;
+            }
+            else{
+                clolow=x-arr[mid];
+                indlow=mid;
+                low=mid+1;
+            }
+        }
+        // cout<<ind<<endl;
+        if(ind<0){
+            if(clolow<clohigh){
+                
+            // cout<< arr[indlow]<<endl;
+            ind=indlow;
+            }
+            else{
+                ind=indhigh;
+            // cout<<arr[indhigh]<<endl;
+            }
+        }
+        int cntleft=ind-1;
+        while(cntleft>=0){
+            kleft.push_back(arr[cntleft]);
+            if(ind-cntleft==k){
+                break;
+            }
+            cntleft--;
+        }
+        if(arr[ind]==x){
+            ind=ind+1;
+        }
+        // cout<<endl<<ind<<endl;
+        int cntright=ind;
+        while(cntright<n){
+            kright.push_back(arr[cntright]);
+            if(cntright-ind+1==k){
+                break;
+            }
+            cntright++;
+        }
+        
+        // for (auto e : kright) {
+        //     cout << e << " ";
+        // }
+        
+        
+        
+        // cout<<endl<<ind<<endl;
+        // for (auto e : kleft) {
+        //     cout << e << " ";
+        // }
+        
+        int left=0,right=0;
+        while(left<kleft.size() && right <kright.size()){
+            if((x-kleft[left])<(kright[right]-x)){
+                ans.push_back(kleft[left]);
+                left++;
+            }
+            else{
+                ans.push_back(kright[right]);
+                right++;
+            }
+            if(ans.size()==k){
+                break;
+            }
+        }
+        while(left<kleft.size() && ans.size()<k){
+            ans.push_back(kleft[left]);
+                left++;
+        }
+         while(right<kright.size() && ans.size()<k){
+            ans.push_back(kright[right]);
+                right++;
+        }
+        return ans;
+    }
+};
+
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k, x;
+        cin >> n;
+        vector<int> arr(n);
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        cin >> k >> x;
+        Solution ob;
+        auto ans = ob.printKClosest(arr, n, k, x);
+        for (auto e : ans) {
+            cout << e << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
