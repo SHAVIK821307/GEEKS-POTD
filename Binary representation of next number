@@ -1,0 +1,67 @@
+//{ Driver Code Starts
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution {
+  public:
+    string binaryNextNumber(string s) {
+        // code here.
+        int n=s.length();
+        string ans="";
+        char crry='1';
+        string scpy="";
+        // removing zeroes from original string
+        bool flag=true;
+        for(int i=0;i<n;i++){
+            if(flag==true && s[i]=='0'){
+                
+            }else{
+                scpy=scpy+s[i];
+                flag=false;
+            }
+        }
+        int n2=scpy.length();
+        for(int i=n2-1;i>=0;i--){
+            if(scpy[i]=='0'){
+                if(crry=='1'){
+                    ans='1'+ans;
+                    crry='0';
+                }
+                else{
+                    ans='0'+ans;
+                }
+            }
+            else{
+                if(crry=='1'){
+                    ans='0'+ans;
+                }
+                else{
+                    ans='1'+ans;
+                }
+            }
+        }
+        if(crry!='0'){
+            ans='1'+ans;
+        }
+        return ans;
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        Solution ob;
+        cout << ob.binaryNextNumber(s);
+        cout << "\n";
+    }
+
+    return 0;
+}
+// } Driver Code Ends
